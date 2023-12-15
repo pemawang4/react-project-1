@@ -1,24 +1,33 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import Form from './components/Form';
+import Table from './components/Table';
+
+const initial = [
+  { name: "John", location: "Germany"},
+]
 
 function App() {
+  const [persons, setPerson] = useState(initial)
+
+  const handleAddPerson = (name, location) => {
+    const newPerson = { name, location }
+    setPerson( [ ...persons, newPerson ])
+  }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div class="container">
+        <div className='d-flex flex-column mt-5 align-items-center justify-content-center'>
+      {/* Form Component */}
+      <Form addPerson={handleAddPerson} />
+
+     {/* Table Component */}
+      <Table persons={persons} />
+
     </div>
+    </div>
+    
   );
 }
 
